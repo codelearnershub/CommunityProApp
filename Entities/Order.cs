@@ -19,8 +19,11 @@ namespace CommunityProApp.Entities
 
         public string DeliveryAddress { get; set; }
 
+        public DateTime DeliveryDate { get; set; }
+
         public decimal TotalPrice { get; set; }
 
         public ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
+        public ICollection<OrderFoodItem> OrderFoodItems { get; set; } = new List<OrderFoodItem>();
     }
 }
