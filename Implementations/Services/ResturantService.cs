@@ -1,4 +1,5 @@
 ﻿using CommunityProApp.Dtos;
+using CommunityProApp.Interfaces.Repositories;
 using CommunityProApp.Interfaces.Services;
 using CommunityProApp.Models;
 using System;
@@ -8,6 +9,12 @@ namespace CommunityProApp.Implementations.Services
 {
     public class ResturantService : IResturantService
     {
+        private readonly IResturantRepository _resturantRepository;
+
+        public ResturantService(IResturantRepository resturantRepository)
+        {
+            _resturantRepository = resturantRepository;
+        }
         public BaseResponse AddFoodItem(CreateFoodItemRequesModel model)
         {
             throw new NotImplementedException();
