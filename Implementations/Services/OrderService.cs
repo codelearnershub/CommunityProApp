@@ -4,6 +4,7 @@ using CommunityProApp.Interfaces.Services;
 using CommunityProApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CommunityProApp.Implementations.Services
 {
@@ -22,7 +23,17 @@ namespace CommunityProApp.Implementations.Services
 
         public IList<OrderDto> GetFoodItemsOderByDate(DateTime date)
         {
-            throw new NotImplementedException();
+            return _orderRepository.GetAll(a => a.Created == date).Select(a => new OrderDto { 
+                Id = a.Id,
+                OrderReference = a.OrderReference,
+                CustomerFullName = $"{a.Customer.LastName} {a.Customer.FirstName}",
+                CustomerId = a.CustomerId,
+                DeliveryAddress = a.DeliveryAddress,
+                DeliveryDate = a.DeliveryDate,
+                Status = a.Status,
+                TotalPrice = a.TotalPrice,
+            }).ToList();
+
         }
 
         public BaseResponse OrderFoodItems(CreateOrderRequestModel model)
