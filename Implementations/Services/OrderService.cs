@@ -18,9 +18,18 @@ namespace CommunityProApp.Implementations.Services
             _restaurantRepository = resturantRepository;
             _orderRepository = orderRepository;
         }
-        public IList<OrderDto> GetFoodItemsOderByCustomer()
+        public IList<OrderDto> GetFoodItemsOderByCustomer(Guid customerId)
         {
-            throw new NotImplementedException();
+            return _orderRepository.GetAll(c => c.CustomerId == customerId).Select(a => new OrderDto
+            {
+                Id = a.Id,
+                CustomerId = a.CustomerId,
+                Status = a.Status,
+                OrderReference  = a.OrderReference,
+                DeliveryAddress = a.DeliveryAddress,
+                DeliveryDate = a.DeliveryDate,
+                TotalPrice = a.TotalPrice
+            }).ToList();
         }
 
         public IList<OrderDto> GetFoodItemsOderByDate(DateTime date)
