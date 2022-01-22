@@ -1,4 +1,5 @@
 ﻿using CommunityProApp.Dtos;
+using CommunityProApp.Entities;
 using CommunityProApp.Interfaces.Repositories;
 using CommunityProApp.Interfaces.Services;
 using CommunityProApp.Models;
@@ -18,7 +19,44 @@ namespace CommunityProApp.Implementations.Services
         }
         public BaseResponse AddFoodItem(CreateFoodItemRequesModel model)
         {
-            throw new NotImplementedException();
+            var fooditemexits = _resturantRepository.Exists(e => e.Name == model.Name);
+            
+            if (fooditemexits == true)
+            {
+                var message = new BaseResponse
+                {
+                    Message = "Already Exits",
+                    Status = false,
+                };
+
+                return message;
+
+
+            }
+
+            else
+            {
+                var fooditem = new FoodItem
+                {
+                    Name = model.Name,
+                    Price = model.Price,
+                    Description = model.Description,
+                    Discount = model.Discount,
+                    ProductImage = model.ProductImage,
+                    ProductAdditionalImage1 = model.ProductAdditionalImage1,
+                    ProductAdditionalImage2 = model.ProductAdditionalImage2,     
+                };
+                _resturantRepository.Create(fooditem);
+                var message = new BaseResponse
+                {
+                    Message = "Create Successfully",
+                    Status = true,
+                };
+
+                return message;
+            }
+
+
         }
 
         public IList<FoodItemDto> DisplayFoodItems()
