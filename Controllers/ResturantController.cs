@@ -100,7 +100,7 @@ namespace CommunityProApp.Controllers
             {
                 return NotFound();
             }
-           return View(foodItem);
+           return View();
         }
         [HttpPost]
          public IActionResult UpdateFoodItem(Guid id , UpdateFoodItemRequestModel model ,IFormFile productImage,IFormFile productAdditionalImage1,IFormFile productAdditionalImage2 )
@@ -162,6 +162,23 @@ namespace CommunityProApp.Controllers
             }
             return View(foodItem);
         }
+         public IActionResult SearchFoodItems()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult SearchFoodItems(string searchText)
+        {
+           var foodItems = _restaurantService.SearchFoodItems(searchText);
+           if (foodItems == null)
+           {
+               return NotFound();
+           }
+           return View();
+        }
+        
+        
+
     
 
 
