@@ -107,7 +107,23 @@ namespace CommunityProApp.Implementations.Services
 
         public BaseResponse UpdateProduct(Guid id, UpdateProductRequestModel model)
         {
-            throw new NotImplementedException();
+            var product = _productRepository.Get(id);
+            if (product == null)
+            {
+                throw new Exception($"product with {id} could not be found");
+            }
+            product.Name = model.Name ?? product.Name;
+            product.Description = model.Description ?? product.Description;
+            product.Price = (model.Price == 0) ? product.Price : model.Price;
+            product.ProductImage = model.ProductImage ?? product.ProductImage;
+            product.ProductAdditionalImage1 = model.ProductAdditionalImage1 ?? product.ProductAdditionalImage1;
+            product.ProductionDate = model.ProductionDate ?? product.ProductionDate;
+            _productRepository.Update(product);
+            return new BaseResponse
+            {
+                Message = $"product with {product.Name} successfully updated",
+                Status = true
+            };
         }
     }
 }

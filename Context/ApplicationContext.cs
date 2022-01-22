@@ -43,5 +43,8 @@ namespace CommunityProApp.Context
         public DbSet<BookAuthor> BookAuthors { get; set; }
         public DbSet<BookLending> BookLendings { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<FoodItem> FoodItems { get; set; }
+        public DbSet<FoodItemCategory> FoodItemCategories { get; set; }
+        public DbSet<OrderFoodItem> OrderFoodItems { get; set; }
     }
 }
