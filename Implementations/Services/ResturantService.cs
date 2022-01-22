@@ -32,7 +32,17 @@ namespace CommunityProApp.Implementations.Services
 
         public IList<FoodItemDto> GetFoodItemsByCategory(Guid categoryId)
         {
-            throw new NotImplementedException();
+            _resturantRepository.GetFoodItemsByCategory(categoryId).Select(fc => new FoodItemDto{
+            Name = fc.Name,
+            Description = fc.Description,
+            Discount = fc.Discount,
+            Price = fc.Price,
+            Id = fc.Id,
+            Rating = fc.Rating,
+            ProductAdditionalImage1 = fc.ProductImage1,
+            ProductAdditionalImage2 = fc.ProductImage2,
+            ProductImage= fc.ProdctIage
+            }).ToList();
         }
 
         public IList<FoodItemDto> SearchFoodItems(string searchText)
