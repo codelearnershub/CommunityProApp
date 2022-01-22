@@ -28,9 +28,15 @@ namespace CommunityProApp.Dtos
 
         public string DeliveryAddress { get; set; }
 
-        public List<Guid> ProductIds { get; set; }
+        public IEnumerable<Cart> OrderItems { get; set; }
 
         public DateTime DeliveryDate { get; set; }
 
+    }
+    public class Cart
+    {
+        public Guid ItemId { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace CommunityProApp.Implementations.Repositories
             return _context.Set<T>().SingleOrDefault(e => e.Id == id);
         }
 
-        public IEnumerable<T> Get(IList<Guid> ids)
+        public List<T> Get(IList<Guid> ids)
         {
             return _context.Set<T>().Where(d => ids.Contains(d.Id)).ToList();
         }

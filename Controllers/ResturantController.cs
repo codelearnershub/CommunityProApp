@@ -1,19 +1,20 @@
-﻿using CommunityProApp.Dtos;
+using CommunityProApp.Dtos;
 using CommunityProApp.Interfaces.Services;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 
 namespace CommunityProApp.Controllers
 {
     public class ResturantController : Controller
     {
         private readonly IResturantService _restaurantService;
+        private readonly IOrderService _orderService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public ResturantController(IResturantService restaurantService , IWebHostEnvironment webHostEnvironment)
@@ -21,7 +22,6 @@ namespace CommunityProApp.Controllers
             _restaurantService = restaurantService;
             _webHostEnvironment = webHostEnvironment;
         }
-
         public IActionResult Index()
         {
            
@@ -166,6 +166,7 @@ namespace CommunityProApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public IActionResult SearchFoodItems(string searchText)
         {
@@ -177,10 +178,17 @@ namespace CommunityProApp.Controllers
            return View();
         }
         
-        
+        [HttpGet]
+        public IActionResult CreateOrder()
+        {
+            return View();
+        }
 
-    
-
-
+        [HttpPost]
+         public IActionResult CreateOrder(CreateOrderRequestModel model)
+        {
+            var order = _orderService.OrderFoodItems(model);
+            return View(order);
+        }
     }
 }
