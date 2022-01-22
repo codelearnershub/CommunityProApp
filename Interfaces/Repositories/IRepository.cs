@@ -14,7 +14,7 @@ namespace CommunityProApp.Interfaces.Repositories
         T Get(Guid id);
         T Get(string name);
         IEnumerable<T> Get();
-        IEnumerable<T> Get(IList<Guid> ids);
+        List<T> Get(IList<Guid> ids);
         T Get(Expression<Func<T, bool>> expression);
         
         IList<T> GetAll(Expression<Func<T, bool>> expression);
