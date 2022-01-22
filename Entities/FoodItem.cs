@@ -21,8 +21,8 @@ namespace CommunityProApp.Entities
         public string ProductAdditionalImage2 { get; set; }
 
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
-        public ICollection<FoodItemCategory> ProductCategories { get; set; } = new List<FoodItemCategory>();
+        public ICollection<FoodItemCategory> FoodItemCategories { get; set; } = new List<FoodItemCategory>();
 
-        public ICollection<OrderFoodItem> OrderProducts { get; set; } = new List<OrderFoodItem>();
+        public ICollection<OrderFoodItem> OrderFoodItems { get; set; } = new List<OrderFoodItem>();
     }
 }

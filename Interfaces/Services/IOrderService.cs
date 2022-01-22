@@ -10,6 +10,8 @@ namespace CommunityProApp.Interfaces.Services
         IList<OrderDto> GetFoodItemsOderByDate(DateTime date);
 
         IList<OrderDto> GetFoodItemsOderByCustomer(Guid customerId);
+     
+        IList<OrderDto> GetFoodItemsOderByReference(string reference);
 
         BaseResponse OrderFoodItems(CreateOrderRequestModel model);
 
