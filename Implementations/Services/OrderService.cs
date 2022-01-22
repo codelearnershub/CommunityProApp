@@ -9,7 +9,6 @@ namespace CommunityProApp.Implementations.Services
 {
     public class OrderService : IOrderService
     {
-        
         public IList<OrderDto> GetFoodItemsOderByCustomer()
         {
             throw new NotImplementedException();
