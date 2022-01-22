@@ -18,7 +18,5 @@ namespace CommunityProApp.Interfaces.Services
         IList<FoodItemDto> GetFoodItemsByCategory(Guid categoryId);
 
         IList<FoodItemDto> SearchFoodItems(string searchText);
-
-
     }
 }
