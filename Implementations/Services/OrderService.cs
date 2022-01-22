@@ -28,15 +28,8 @@ namespace CommunityProApp.Implementations.Services
 
         public IList<OrderDto> GetFoodItemsOderByReference(string reference)
         {
-            return _orderRepository.GetAll( a => a.OrderReference == reference).Select(b => new OrderDto{
-                Id = b.Id,
-                CustomerFullName = $"{b.Customer.FirstName}  {b.Customer.LastName}",
-                DeliveryAddress = b.DeliveryAddress,
-                DeliveryDate = b.DeliveryDate,
-                OrderReference = b.OrderReference,
-                Status = b.Status,
-                TotalPrice = b.TotalPrice                
-            }).ToList();
+            return _orderRepository.Search(reference);
+           
         }
 
         public BaseResponse OrderFoodItems(CreateOrderRequestModel model)
