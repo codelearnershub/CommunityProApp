@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CommunityProApp.Dtos;
+using CommunityProApp.Interfaces.Services;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,9 +13,74 @@ namespace CommunityProApp.Controllers
 {
     public class ResturantController : Controller
     {
+        private readonly IResturantService _restaurantService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ResturantController(IResturantService restaurantService , IWebHostEnvironment webHostEnvironment)
+        {
+            _restaurantService = restaurantService;
+            _webHostEnvironment = webHostEnvironment;
+        }
+
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpGet]
+        public IActionResult AddFoodItem()
+        {
+            return View();
+        }
+        [HttpPost]
+          public IActionResult AddFoodItem(CreateFoodItemRequesModel model , IFormFile productImage,IFormFile productAdditionalImage1,IFormFile productAdditionalImage2)
+        {
+            if(productImage != null)
+            {
+                string productImagePath = Path.Combine(_webHostEnvironment.WebRootPath , "ProductImage");
+                Directory.CreateDirectory(productImagePath);
+                string contentType = productImage.ContentType.Split('/')[1];
+                string photoImage = $"FDI{Guid.NewGuid()}.{contentType}";
+                string fullPath = Path.Combine(productImagePath , photoImage);
+                using(var fileStream = new FileStream(fullPath , FileMode.Create))
+                {
+                    productImage.CopyTo(fileStream);
+
+                }
+                model.ProductImage = photoImage;
+            
+            }
+               if(productAdditionalImage1 != null)
+            {
+                string productAdditionalImage1PhotoPath = Path.Combine(_webHostEnvironment.WebRootPath , "productAdditionalImage1");
+                Directory.CreateDirectory(productAdditionalImage1PhotoPath);
+                string contentType = productAdditionalImage1.ContentType.Split('/')[1];
+                string photoImage = $"FDI{Guid.NewGuid()}.{contentType}";
+                string fullPath = Path.Combine(productAdditionalImage1PhotoPath , photoImage);
+                using(var fileStream = new FileStream(fullPath , FileMode.Create))
+                {
+                    productAdditionalImage1.CopyTo(fileStream);
+
+                }
+                model.ProductAdditionalImage1 = photoImage;
+            
+            }
+               if(productAdditionalImage2 != null)
+            {
+                string productAdditionalImage2PhotoPath = Path.Combine(_webHostEnvironment.WebRootPath , "productAdditionalImage2");
+                Directory.CreateDirectory(productAdditionalImage2PhotoPath);
+                string contentType = productAdditionalImage2.ContentType.Split('/')[1];
+                string photoImage = $"FDI{Guid.NewGuid()}.{contentType}";
+                string fullPath = Path.Combine(productAdditionalImage2PhotoPath , photoImage);
+                using(var fileStream = new FileStream(fullPath , FileMode.Create))
+                {
+                    productAdditionalImage2.CopyTo(fileStream);
+
+                }
+                model.ProductAdditionalImage2 = photoImage;
+            
+            }
+           var foodItem = _restaurantService.AddFoodItem(model);
+            return View(foodItem);
         }
     }
 }
