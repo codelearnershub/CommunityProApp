@@ -15,7 +15,7 @@ namespace CommunityProApp.Implementations.Services
 
         public IList<FoodItemDto> DisplayFoodItems()
         {
-            throw new NotImplementedException();
+           throw new NotImplementedException();
         }
 
         public FoodItemDto FoodItemDetail(Guid id)
