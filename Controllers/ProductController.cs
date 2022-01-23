@@ -76,7 +76,7 @@ namespace CommunityProApp.Controllers
                 model.ProductAdditionalImage2 = productImage2;
             }
             _productService.AddProduct(model);
-            return View("AdminProductsIndex");
+            return View();
         }
 
         public IActionResult ProductDetail(int id)
