@@ -12,13 +12,13 @@ namespace CommunityProApp.Interfaces.Services
     {
         BaseResponse AddProduct(CreateProductRequestModel model);
 
-        BaseResponse UpdateProduct(Guid id, UpdateProductRequestModel model);
+        BaseResponse UpdateProduct(int id, UpdateProductRequestModel model);
 
-        ProductDto ProductDetail(Guid id);
+        ProductDto ProductDetail(int id);
 
         IList<ProductDto> GetProducts();
 
-        IList<ProductDto> GetProductsByCategory(Guid categoryId);
+        IList<ProductDto> GetProductsByCategory(int categoryId);
 
         IList<ProductDto> SearchProducts(string searchText);
 

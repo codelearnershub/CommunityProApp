@@ -8,7 +8,7 @@ namespace CommunityProApp.Dtos
 {
     public class ProductDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
 
@@ -59,6 +59,8 @@ namespace CommunityProApp.Dtos
         public string ProductAdditionalImage1 { get; set; }
 
         public string ProductAdditionalImage2 { get; set; }
+
+        public IList<int> CategoryIds { get; set; } = new List<int>();
     }
 
     public class UpdateProductRequestModel

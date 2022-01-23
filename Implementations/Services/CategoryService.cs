@@ -51,7 +51,7 @@ namespace CommunityProApp.Implementations.Services
             }).ToList();
         }
 
-        public CategoryDto GetCategory(Guid id)
+        public CategoryDto GetCategory(int id)
         {
             var category = _categoryRepository.Get(id);
             return new CategoryDto
@@ -62,7 +62,7 @@ namespace CommunityProApp.Implementations.Services
             };
         }
 
-        public BaseResponse UpdateCategory(Guid id, UpdateCategoryRequestModel model)
+        public BaseResponse UpdateCategory(int id, UpdateCategoryRequestModel model)
         {
             var category = _categoryRepository.Get(id);
             if (category == null)

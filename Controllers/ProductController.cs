@@ -30,7 +30,13 @@ namespace CommunityProApp.Controllers
             return View(products);
         }
 
-        public IActionResult AddProduct()
+        public IActionResult AdminProductsIndex()
+        {
+            var products = _productService.GetProducts();
+            return View(products);
+        }
+
+        public IActionResult Create()
         {
             var categories = _categoryService.GetCategories();
             ViewData["Categories"] = new SelectList(categories, "Id", "Name");
@@ -38,7 +44,7 @@ namespace CommunityProApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddProduct(CreateProductRequestModel model, IFormFile image, IFormFile image1, IFormFile image2)
+        public IActionResult Create(CreateProductRequestModel model, IFormFile image, IFormFile image1, IFormFile image2)
         {
             if (image != null)
             {
@@ -70,13 +76,19 @@ namespace CommunityProApp.Controllers
                 model.ProductAdditionalImage2 = productImage2;
             }
             _productService.AddProduct(model);
-            return View();
+            return View("AdminProductsIndex");
         }
 
-        public IActionResult ProductDetail(Guid id)
+        public IActionResult ProductDetail(int id)
         {
             var product = _productService.ProductDetail(id);
             return View(product);
+        }
+
+        public IActionResult SearcProduct(string searchText)
+        {
+            var products = _productService.SearchProducts(searchText);
+            return View("Index", products);
         }
     }
 }

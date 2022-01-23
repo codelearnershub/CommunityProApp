@@ -4,6 +4,7 @@ using CommunityProApp.Implementations.Repositories;
 using CommunityProApp.Interfaces.Repositories;
 using CommunityProApp.Interfaces.Services;
 using CommunityProApp.Models;
+using MassTransit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,11 @@ namespace CommunityProApp.Implementations.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly ICategoryRepository _categoryRepository;
+        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
         }
         public BaseResponse AddProduct(CreateProductRequestModel model)
         {
@@ -32,15 +35,31 @@ namespace CommunityProApp.Implementations.Services
                     Name = model.Name,
                     Description = model.Description,
                     Discount = model.Discount,
-                    LifeSpanDuration = model.LifeSpanDuration,
+                   
                     Price = model.Price,
                     Status = Enums.ProductStatus.Available,
                     ProductionDate = model.ProductionDate,
                     ProductImage = model.ProductImage,
                     ProductAdditionalImage1 = model.ProductAdditionalImage1,
-                    ProductAdditionalImage2 = model.ProductAdditionalImage2
-
+                    ProductAdditionalImage2 = model.ProductAdditionalImage2,
+                    IsDeleted = false,
+                    Created = DateTime.UtcNow
                 };
+                var categories = _categoryRepository.GetSelected(model.CategoryIds);
+                foreach(var category in categories)
+                {
+                    var productCategory = new ProductCategory
+                    {
+                       
+                        CategoryId = category.Id,
+                        Category = category,
+                        Product = product,
+                        ProductId = product.Id,
+                        IsDeleted = false,
+                        Created = DateTime.UtcNow
+                    };
+                    product.ProductCategories.Add(productCategory);
+                }
                 _productRepository.Create(product);
                 return new BaseResponse
                 {
@@ -65,7 +84,7 @@ namespace CommunityProApp.Implementations.Services
             }).ToList();
         }
 
-        public IList<ProductDto> GetProductsByCategory(Guid categoryId)
+        public IList<ProductDto> GetProductsByCategory(int categoryId)
         {
             return _productRepository.GetProductsByCategory(categoryId).Select(product => new ProductDto
             {
@@ -79,7 +98,7 @@ namespace CommunityProApp.Implementations.Services
             }).ToList();
         }
 
-        public ProductDto ProductDetail(Guid id)
+        public ProductDto ProductDetail(int id)
         {
             var product = _productRepository.Get(id);
             return new ProductDto
@@ -92,7 +111,7 @@ namespace CommunityProApp.Implementations.Services
                 ProductAdditionalImage1 = product.ProductAdditionalImage1,
                 ProductAdditionalImage2 = product.ProductAdditionalImage2,
                 Description = product.Description,
-                LifeSpanDuration = product.LifeSpanDuration,
+                
                 //Comments = product.Comments,
                 ProductionDate = product.ProductionDate,
                 Rating = product.Rating,
@@ -105,7 +124,7 @@ namespace CommunityProApp.Implementations.Services
             return _productRepository.Search(searchText).ToList();
         }
 
-        public BaseResponse UpdateProduct(Guid id, UpdateProductRequestModel model)
+        public BaseResponse UpdateProduct(int id, UpdateProductRequestModel model)
         {
             var product = _productRepository.Get(id);
             if (product == null)

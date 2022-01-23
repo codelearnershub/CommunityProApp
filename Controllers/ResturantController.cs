@@ -17,9 +17,10 @@ namespace CommunityProApp.Controllers
         private readonly IOrderService _orderService;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ResturantController(IResturantService restaurantService , IWebHostEnvironment webHostEnvironment)
+        public ResturantController(IResturantService restaurantService, IOrderService orderService, IWebHostEnvironment webHostEnvironment)
         {
             _restaurantService = restaurantService;
+            _orderService = orderService;
             _webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
@@ -27,11 +28,13 @@ namespace CommunityProApp.Controllers
            
             return View( _restaurantService.DisplayFoodItems());
         }
+
         [HttpGet]
         public IActionResult AddFoodItem()
         {
             return View();
         }
+
         [HttpPost]
           public IActionResult AddFoodItem(CreateFoodItemRequesModel model , IFormFile productImage,IFormFile productAdditionalImage1,IFormFile productAdditionalImage2)
         {
@@ -84,7 +87,7 @@ namespace CommunityProApp.Controllers
             return View(foodItem);
         }
         
-        public IActionResult FoodItemDetails(Guid id)
+        public IActionResult FoodItemDetails(int id)
         {
            var foodItem = _restaurantService.FoodItemDetail(id);
             if (foodItem == null)
@@ -93,7 +96,7 @@ namespace CommunityProApp.Controllers
             }
             return View(foodItem);
         }
-        public IActionResult UpdateFoodItem(Guid id)
+        public IActionResult UpdateFoodItem(int id)
         {
             var foodItem = _restaurantService.FoodItemDetail(id);
             if (foodItem == null)
@@ -103,7 +106,7 @@ namespace CommunityProApp.Controllers
            return View();
         }
         [HttpPost]
-         public IActionResult UpdateFoodItem(Guid id , UpdateFoodItemRequestModel model ,IFormFile productImage,IFormFile productAdditionalImage1,IFormFile productAdditionalImage2 )
+         public IActionResult UpdateFoodItem(int id , UpdateFoodItemRequestModel model ,IFormFile productImage,IFormFile productAdditionalImage1,IFormFile productAdditionalImage2 )
         {
            if(productImage != null)
             {
@@ -153,7 +156,7 @@ namespace CommunityProApp.Controllers
            var response = _restaurantService.UpdateFoodItem(id,model);
             return View(response);
         }
-        public IActionResult GetFoodItemByCategory(Guid categoryId)
+        public IActionResult GetFoodItemByCategory(int categoryId)
         {
             var foodItem = _restaurantService.GetFoodItemsByCategory(categoryId);
             if (foodItem == null)

@@ -15,10 +15,6 @@ namespace CommunityProApp.Entities
 
         public string Phone { get; set; }
 
-        public Guid UserId { get; set; }
-
-        public User User { get; set; }
-
         public ICollection<Order> Orders { get; set; } = new List<Order>();
 
         public ICollection<HotelBooking> HotelBookings { get; set; } = new List<HotelBooking>();

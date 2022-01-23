@@ -18,7 +18,7 @@ namespace CommunityProApp.Implementations.Services
             _restaurantRepository = resturantRepository;
             _orderRepository = orderRepository;
         }
-        public IList<OrderDto> GetFoodItemsOderByCustomer(Guid customerId)
+        public IList<OrderDto> GetFoodItemsOderByCustomer(int customerId)
         {
             return _orderRepository.GetAll(c => c.CustomerId == customerId).Select(a => new OrderDto
             {

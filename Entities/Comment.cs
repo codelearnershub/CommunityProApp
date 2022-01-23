@@ -9,7 +9,7 @@ namespace CommunityProApp.Entities
     {
         public string ProductComment { get; set; }
 
-        public Guid ProductId { get; set; }
+        public int ProductId { get; set; }
 
         public Product Product { get; set; }
 

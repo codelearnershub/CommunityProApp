@@ -34,13 +34,5 @@ namespace CommunityProApp.Entities
         public string Password { get; set; }
 
         public string Role { get; set; }
-
-        public Doctor Doctor { get; set; }
-
-        public Instructor Instructor { get; set; }
-
-        public Student Student { get; set; }
-
-        public Patient Patient { get; set; }
     }
 }

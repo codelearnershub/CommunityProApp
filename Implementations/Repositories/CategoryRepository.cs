@@ -14,5 +14,10 @@ namespace CommunityProApp.Implementations.Repositories
         {
             _context = context;
         }
+
+        public IEnumerable<Category> GetSelected(IList<int> ids)
+        {
+            return _context.Categories.Where(d => ids.Contains(d.Id)).ToList();
+        }
     }
 }

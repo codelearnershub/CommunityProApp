@@ -22,9 +22,6 @@ namespace CommunityProApp.Entities
         public BloodGroup Group { get; set; }
 
         public Genotype Genotype { get; set; }
-        public Guid UserId { get; set; }
-
-        public User User { get; set; }
 
         public ICollection<MedicalRecord> MedicalRecords { get; set; } = new List<MedicalRecord>();
     }

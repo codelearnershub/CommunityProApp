@@ -33,12 +33,12 @@ namespace CommunityProApp.Implementations.Repositories
         }
 
        
-        public T Get(Guid id)
+        public T Get(int id)
         {
             return _context.Set<T>().SingleOrDefault(e => e.Id == id);
         }
 
-        public List<T> Get(IList<Guid> ids)
+        public IEnumerable<T> Get(IList<int> ids)
         {
             return _context.Set<T>().Where(d => ids.Contains(d.Id)).ToList();
         }
@@ -58,7 +58,7 @@ namespace CommunityProApp.Implementations.Repositories
             return _context.Set<T>().Where(expression).ToList();
         }
 
-        public bool Exists(Guid id)
+        public bool Exists(int id)
         {
             return _context.Set<T>().Any(d => d.Id == id);
         }

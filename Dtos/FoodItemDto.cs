@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CommunityProApp.Dtos
 {
     public class FoodItemDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -38,6 +39,8 @@ namespace CommunityProApp.Dtos
         public string ProductAdditionalImage1 { get; set; }
 
         public string ProductAdditionalImage2 { get; set; }
+
+        public IList<int> CategoryIds { get; set; }
     }
 
     public class UpdateFoodItemRequestModel

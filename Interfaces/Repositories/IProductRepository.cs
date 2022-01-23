@@ -9,7 +9,7 @@ namespace CommunityProApp.Interfaces.Repositories
 {
     public interface IProductRepository : IRepository<Product>
     {
-        IList<Product> GetProductsByCategory(Guid categoryId);
+        IList<Product> GetProductsByCategory(int categoryId);
 
         IList<ProductDto> Search(string searchText);
     }

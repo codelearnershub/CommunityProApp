@@ -6,10 +6,10 @@ namespace CommunityProApp.Dtos
 {
     public class OrderDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string OrderReference { get; set; }
 
-        public Guid CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         public string CustomerFullName { get; set; }
 
@@ -24,7 +24,7 @@ namespace CommunityProApp.Dtos
 
     public class CreateOrderRequestModel
     {
-        public Guid CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         public string DeliveryAddress { get; set; }
 
@@ -35,7 +35,7 @@ namespace CommunityProApp.Dtos
     }
     public class Cart
     {
-        public Guid ItemId { get; set; }
+        public int ItemId { get; set; }
 
         public int Quantity { get; set; }
     }

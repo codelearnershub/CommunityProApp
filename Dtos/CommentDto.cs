@@ -7,7 +7,7 @@ namespace CommunityProApp.Dtos
 {
     public class CommentDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string ProductComment { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace CommunityProApp.Interfaces.Services
     {
         IList<OrderDto> GetFoodItemsOderByDate(DateTime date);
 
-        IList<OrderDto> GetFoodItemsOderByCustomer(Guid customerId);
+        IList<OrderDto> GetFoodItemsOderByCustomer(int customerId);
      
         IList<OrderDto> GetFoodItemsOderByReference(string reference);
 

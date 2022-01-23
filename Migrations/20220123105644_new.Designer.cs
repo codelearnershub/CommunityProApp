@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CommunityProApp.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220120094116_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20220123105644_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,9 +21,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Author", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Biography")
                         .HasColumnType("text");
@@ -56,9 +56,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Book", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<int>("AccessibilityStatus")
                         .HasColumnType("int");
@@ -118,21 +118,15 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.BookAuthor", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("AuthorId1")
-                        .HasColumnType("varbinary(16)");
-
                     b.Property<int>("BookId")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("BookId1")
-                        .HasColumnType("varbinary(16)");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -151,24 +145,21 @@ namespace CommunityProApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId1");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("BookId1");
+                    b.HasIndex("BookId");
 
                     b.ToTable("BookAuthors");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.BookLending", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<int>("BookId")
                         .HasColumnType("int");
-
-                    b.Property<byte[]>("BookId1")
-                        .HasColumnType("varbinary(16)");
 
                     b.Property<bool>("BookReturned")
                         .HasColumnType("tinyint(1)");
@@ -197,23 +188,20 @@ namespace CommunityProApp.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("UserId1")
-                        .HasColumnType("varbinary(16)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId1");
+                    b.HasIndex("BookId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("BookLendings");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.Category", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -243,9 +231,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Comment", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -256,6 +244,12 @@ namespace CommunityProApp.Migrations
                     b.Property<byte[]>("CustomerId")
                         .IsRequired()
                         .HasColumnType("varbinary(16)");
+
+                    b.Property<int?>("CustomerId1")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FoodItemId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -269,16 +263,17 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("ProductComment")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("ProductRating")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerId1");
+
+                    b.HasIndex("FoodItemId");
 
                     b.HasIndex("ProductId");
 
@@ -287,9 +282,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Course", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Code")
                         .HasColumnType("text");
@@ -300,9 +295,8 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("InstructorId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -318,17 +312,16 @@ namespace CommunityProApp.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InstructorId")
-                        .IsUnique();
+                    b.HasIndex("InstructorId");
 
                     b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.Customer", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -357,22 +350,16 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.Department", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -399,9 +386,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Doctor", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -439,23 +426,16 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("CommunityProApp.Entities.HotelBooking", b =>
+            modelBuilder.Entity("CommunityProApp.Entities.FoodItem", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -463,9 +443,94 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Discount")
+                        .HasColumnType("double");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.Property<string>("ProductAdditionalImage1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductAdditionalImage2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ProductImage")
+                        .HasColumnType("text");
+
+                    b.Property<double?>("Rating")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FoodItems");
+                });
+
+            modelBuilder.Entity("CommunityProApp.Entities.FoodItemCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("FoodItemId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("FoodItemId");
+
+                    b.ToTable("FoodItemCategories");
+                });
+
+            modelBuilder.Entity("CommunityProApp.Entities.HotelBooking", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Duration")
                         .HasColumnType("int");
@@ -482,9 +547,8 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("RoomId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("RoomPrice")
                         .HasColumnType("decimal(18, 2)");
@@ -503,9 +567,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Instructor", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -534,23 +598,52 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Instructors");
                 });
 
+            modelBuilder.Entity("CommunityProApp.Entities.InstructorCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("InstructorId");
+
+                    b.ToTable("InstructorCourse");
+                });
+
             modelBuilder.Entity("CommunityProApp.Entities.MedicalRecord", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("AdminReport")
                         .HasColumnType("text");
@@ -567,8 +660,8 @@ namespace CommunityProApp.Migrations
                     b.Property<DateTime>("DateCompleted")
                         .HasColumnType("datetime");
 
-                    b.Property<byte[]>("DoctorId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("DoctorReport")
                         .HasColumnType("text");
@@ -585,9 +678,8 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("PatientId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("PatientId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -603,9 +695,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Order", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -613,12 +705,14 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("DeliveryAddress")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("DeliveryDate")
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -645,11 +739,53 @@ namespace CommunityProApp.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("CommunityProApp.Entities.OrderFoodItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("FoodItemId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FoodItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderFoodItems");
+                });
+
             modelBuilder.Entity("CommunityProApp.Entities.OrderProduct", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -666,13 +802,11 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("OrderId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
 
-                    b.Property<byte[]>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -691,9 +825,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Patient", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
@@ -731,23 +865,16 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.Product", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -763,9 +890,6 @@ namespace CommunityProApp.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
-
-                    b.Property<int?>("LifeSpanDuration")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Modified")
                         .HasColumnType("datetime");
@@ -804,13 +928,12 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.ProductCategory", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
-                    b.Property<byte[]>("CategoryId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -827,9 +950,8 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -842,9 +964,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Room", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -889,9 +1011,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.Student", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -899,8 +1021,8 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("DepartmentId")
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -923,29 +1045,21 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("text");
 
-                    b.Property<byte[]>("UserId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Students");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.StudentCourse", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
-                    b.Property<byte[]>("CourseId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
@@ -968,9 +1082,8 @@ namespace CommunityProApp.Migrations
                     b.Property<double>("Score")
                         .HasColumnType("double");
 
-                    b.Property<byte[]>("StudentId")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -983,9 +1096,9 @@ namespace CommunityProApp.Migrations
 
             modelBuilder.Entity("CommunityProApp.Entities.User", b =>
                 {
-                    b.Property<byte[]>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Address")
                         .HasColumnType("text");
@@ -1050,11 +1163,15 @@ namespace CommunityProApp.Migrations
                 {
                     b.HasOne("CommunityProApp.Entities.Author", "Author")
                         .WithMany("BookAuthors")
-                        .HasForeignKey("AuthorId1");
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CommunityProApp.Entities.Book", "Book")
                         .WithMany("BookAuthors")
-                        .HasForeignKey("BookId1");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Author");
 
@@ -1065,11 +1182,15 @@ namespace CommunityProApp.Migrations
                 {
                     b.HasOne("CommunityProApp.Entities.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("BookId1");
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CommunityProApp.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Book");
 
@@ -1080,9 +1201,11 @@ namespace CommunityProApp.Migrations
                 {
                     b.HasOne("CommunityProApp.Entities.User", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId1");
+
+                    b.HasOne("CommunityProApp.Entities.FoodItem", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("FoodItemId");
 
                     b.HasOne("CommunityProApp.Entities.Product", "Product")
                         .WithMany("Comments")
@@ -1098,34 +1221,31 @@ namespace CommunityProApp.Migrations
             modelBuilder.Entity("CommunityProApp.Entities.Course", b =>
                 {
                     b.HasOne("CommunityProApp.Entities.Instructor", "Instructor")
-                        .WithOne("Course")
-                        .HasForeignKey("CommunityProApp.Entities.Course", "InstructorId")
+                        .WithMany()
+                        .HasForeignKey("InstructorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Instructor");
                 });
 
-            modelBuilder.Entity("CommunityProApp.Entities.Customer", b =>
+            modelBuilder.Entity("CommunityProApp.Entities.FoodItemCategory", b =>
                 {
-                    b.HasOne("CommunityProApp.Entities.User", "User")
+                    b.HasOne("CommunityProApp.Entities.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CommunityProApp.Entities.Doctor", b =>
-                {
-                    b.HasOne("CommunityProApp.Entities.User", "User")
-                        .WithOne("Doctor")
-                        .HasForeignKey("CommunityProApp.Entities.Doctor", "UserId")
+                    b.HasOne("CommunityProApp.Entities.FoodItem", "FoodItem")
+                        .WithMany("FoodItemCategories")
+                        .HasForeignKey("FoodItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("Category");
+
+                    b.Navigation("FoodItem");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.HotelBooking", b =>
@@ -1147,15 +1267,23 @@ namespace CommunityProApp.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("CommunityProApp.Entities.Instructor", b =>
+            modelBuilder.Entity("CommunityProApp.Entities.InstructorCourse", b =>
                 {
-                    b.HasOne("CommunityProApp.Entities.User", "User")
-                        .WithOne("Instructor")
-                        .HasForeignKey("CommunityProApp.Entities.Instructor", "UserId")
+                    b.HasOne("CommunityProApp.Entities.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.HasOne("CommunityProApp.Entities.Instructor", "Instructor")
+                        .WithMany("InstructorCourses")
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Instructor");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.MedicalRecord", b =>
@@ -1186,6 +1314,25 @@ namespace CommunityProApp.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("CommunityProApp.Entities.OrderFoodItem", b =>
+                {
+                    b.HasOne("CommunityProApp.Entities.FoodItem", "FoodItem")
+                        .WithMany("OrderFoodItems")
+                        .HasForeignKey("FoodItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CommunityProApp.Entities.Order", "Order")
+                        .WithMany("OrderFoodItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FoodItem");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("CommunityProApp.Entities.OrderProduct", b =>
                 {
                     b.HasOne("CommunityProApp.Entities.Order", "Order")
@@ -1203,17 +1350,6 @@ namespace CommunityProApp.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("CommunityProApp.Entities.Patient", b =>
-                {
-                    b.HasOne("CommunityProApp.Entities.User", "User")
-                        .WithOne("Patient")
-                        .HasForeignKey("CommunityProApp.Entities.Patient", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.ProductCategory", b =>
@@ -1240,14 +1376,6 @@ namespace CommunityProApp.Migrations
                     b.HasOne("CommunityProApp.Entities.Department", null)
                         .WithMany("Students")
                         .HasForeignKey("DepartmentId");
-
-                    b.HasOne("CommunityProApp.Entities.User", "User")
-                        .WithOne("Student")
-                        .HasForeignKey("CommunityProApp.Entities.Student", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.StudentCourse", b =>
@@ -1306,13 +1434,24 @@ namespace CommunityProApp.Migrations
                     b.Navigation("MedicalRecords");
                 });
 
+            modelBuilder.Entity("CommunityProApp.Entities.FoodItem", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("FoodItemCategories");
+
+                    b.Navigation("OrderFoodItems");
+                });
+
             modelBuilder.Entity("CommunityProApp.Entities.Instructor", b =>
                 {
-                    b.Navigation("Course");
+                    b.Navigation("InstructorCourses");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.Order", b =>
                 {
+                    b.Navigation("OrderFoodItems");
+
                     b.Navigation("OrderProducts");
                 });
 
@@ -1338,17 +1477,6 @@ namespace CommunityProApp.Migrations
             modelBuilder.Entity("CommunityProApp.Entities.Student", b =>
                 {
                     b.Navigation("StudentCourses");
-                });
-
-            modelBuilder.Entity("CommunityProApp.Entities.User", b =>
-                {
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Instructor");
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("Student");
                 });
 #pragma warning restore 612, 618
         }

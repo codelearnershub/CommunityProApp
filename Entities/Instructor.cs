@@ -15,9 +15,6 @@ namespace CommunityProApp.Entities
 
         public string Phone { get; set; }
 
-        public Course Course { get; set; }
-        public Guid UserId { get; set; }
-
-        public User User { get; set; }
+        public ICollection<InstructorCourse> InstructorCourses { get; set; } = new List<InstructorCourse>();
     }
 }

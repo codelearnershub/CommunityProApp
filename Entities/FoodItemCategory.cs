@@ -4,11 +4,11 @@ namespace CommunityProApp.Entities
 {
     public class FoodItemCategory : BaseEntity
     {
-        public Guid ProductId { get; set; }
+        public int FoodItemId { get; set; }
 
         public FoodItem FoodItem { get; set; }
 
-        public Guid CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public Category Category { get; set; }
     }

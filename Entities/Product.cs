@@ -14,8 +14,6 @@ namespace CommunityProApp.Entities
 
         public DateTime? ProductionDate { get; set; }
 
-        public int? LifeSpanDuration { get; set; }
-
         public decimal Price { get; set; }
 
         public double? Rating { get; set; }

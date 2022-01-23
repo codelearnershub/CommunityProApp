@@ -17,7 +17,7 @@ namespace CommunityProApp.Implementations.Repositories
             _context = context;
         }
 
-        public IList<Product> GetProductsByCategory(Guid categoryId)
+        public IList<Product> GetProductsByCategory(int categoryId)
         {
             return _context.Products.Include(p => p.ProductCategories).ThenInclude(pc => pc.Category).Where(pc => pc.ProductCategories.Any(pc => pc.CategoryId == categoryId)).ToList();
         }

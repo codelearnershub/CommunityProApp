@@ -2,14 +2,14 @@
 
 namespace CommunityProApp.Entities
 {
-    public class OrderFoodItem
+    public class OrderFoodItem : BaseEntity
     {
 
-        public Guid OrderId { get; set; }
+        public int OrderId { get; set; }
 
         public Order Order { get; set; }
 
-        public Guid FoodItemId { get; set; }
+        public int FoodItemId { get; set; }
 
         public FoodItem FoodItem { get; set; }
 

@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Implementations\Services\ResturantService.cs~RF6981b4.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.13">
       <PrivateAssets>all</PrivateAssets>
@@ -13,10 +17,6 @@
     <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="NewId" Version="3.0.3" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Category\" />
   </ItemGroup>
 
   <ItemGroup>

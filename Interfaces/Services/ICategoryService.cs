@@ -11,9 +11,9 @@ namespace CommunityProApp.Interfaces.Services
     {
         BaseResponse AddCategory(CreateCategoryRequestModel model);
 
-        BaseResponse UpdateCategory(Guid id, UpdateCategoryRequestModel model);
+        BaseResponse UpdateCategory(int id, UpdateCategoryRequestModel model);
 
-        CategoryDto GetCategory(Guid id);
+        CategoryDto GetCategory(int id);
 
         IList<CategoryDto> GetCategories();
 
