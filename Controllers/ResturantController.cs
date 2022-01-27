@@ -26,7 +26,7 @@ namespace CommunityProApp.Controllers
         public IActionResult Index()
         {
            
-            return View( _restaurantService.DisplayFoodItems());
+            return View();
         }
 
         [HttpGet]
