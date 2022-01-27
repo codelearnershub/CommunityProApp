@@ -79,15 +79,15 @@ namespace CommunityProApp.Controllers
             return View();
         }
 
-        public IActionResult ProductDetail(int id)
+        public IActionResult ProductDetails(int id)
         {
             var product = _productService.ProductDetail(id);
             return View(product);
         }
 
-        public IActionResult SearcProduct(string searchText)
+        public IActionResult SearcProduct(string search)
         {
-            var products = _productService.SearchProducts(searchText);
+            var products = _productService.SearchProducts(search);
             return View("Index", products);
         }
     }
