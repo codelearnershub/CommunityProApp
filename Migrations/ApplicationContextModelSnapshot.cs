@@ -521,6 +521,12 @@ namespace CommunityProApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CheckInDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("CheckOutDate")
+                        .HasColumnType("datetime");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime");
 
@@ -530,12 +536,6 @@ namespace CommunityProApp.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Duration")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("From")
-                        .HasColumnType("datetime");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -543,6 +543,12 @@ namespace CommunityProApp.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("NumberOfAdults")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReferenceNumber")
                         .HasColumnType("text");
 
                     b.Property<int>("RoomId")
@@ -972,18 +978,6 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Image2")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Image3")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
@@ -993,18 +987,67 @@ namespace CommunityProApp.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18, 2)");
-
                     b.Property<string>("RoomNumber")
                         .HasColumnType("text");
 
-                    b.Property<int>("Type")
+                    b.Property<int>("RoomTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoomTypeId");
+
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("CommunityProApp.Entities.RoomType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image3")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("MaxNumberOfAdult")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("Modified")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18, 2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomTypes");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.Student", b =>
@@ -1369,6 +1412,17 @@ namespace CommunityProApp.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("CommunityProApp.Entities.Room", b =>
+                {
+                    b.HasOne("CommunityProApp.Entities.RoomType", "Type")
+                        .WithMany("Rooms")
+                        .HasForeignKey("RoomTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Type");
+                });
+
             modelBuilder.Entity("CommunityProApp.Entities.Student", b =>
                 {
                     b.HasOne("CommunityProApp.Entities.Department", null)
@@ -1470,6 +1524,11 @@ namespace CommunityProApp.Migrations
             modelBuilder.Entity("CommunityProApp.Entities.Room", b =>
                 {
                     b.Navigation("HotelBookings");
+                });
+
+            modelBuilder.Entity("CommunityProApp.Entities.RoomType", b =>
+                {
+                    b.Navigation("Rooms");
                 });
 
             modelBuilder.Entity("CommunityProApp.Entities.Student", b =>

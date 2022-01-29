@@ -1,10 +1,445 @@
 ﻿@model IEnumerable<CommunityProApp.Dtos.ProductDto>
 @{
-    Layout = "~/Views/Shared/_MarketPlace.cshtml";
+    Layout = "~/Views/Shared/_eStore.cshtml";
     ViewData["Title"] = "Market Place";
 }
+@{
+    ViewData["Title"] = "Home";
+}
 
-  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div class="slider-area">
+    <div class="hero-slider-active-2 dot-style-1 dot-style-1-position-1">
+        <div class="single-hero-slider single-animation-wrap slider-height-3 custom-d-flex custom-align-item-center hm3-bg-color-1">
+            <div class="custom-container">
+                <div class="row align-items-center slider-animated-1">
+                    <div class="col-lg-6 col-md-6 col-12 col-sm-6">
+                        <div class="hero-slider-content-3">
+                            @*<h4 class="animated">Only <span>$1000</span> </h4>*@
+                            <h1 class="animated">Buy Cheap Result Checker Pins Online</h1>
+                            <p class="animated">Getting genuine and cheap WAEC, NECO and NABTEB exam pins/ scratch card for registration and result checking is made easy.</p>
+                            <div class="btn-style-1">
+                                <a class="animated btn-1-padding-5" asp-action="products" asp-controller="home">Buy now </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12 col-sm-6">
+                        <div class="single-slider-img single-slider-img-4">
+                            <img class="animated" src="~/images/sliders/page-9.jpeg" alt="">
+                            <div class="slider-product-price slider-product-position5 slider-animated-1 animated">
+                                <h3>
+                                    Best
+                                    <span class="mrg-top">selling </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-hero-slider single-animation-wrap slider-height-3 custom-d-flex custom-align-item-center bg-img" style="background-image:url(~/assets/images/slider/hm3-slider-bg-2.jpg);">
+            <div class="custom-container">
+                <div class="row align-items-center slider-animated-1">
+                    <div class="col-lg-6 col-md-6 col-12 col-sm-6">
+                        <div class="hero-slider-content-4">
+                            <div class="slider-product-offer-wrap-2 animated">
+                                <div class="slider-product-offer-2">
+                                    <span class="yellow">hot </span>
+                                </div>
+                                <p>Grow your income </p>
+                            </div>
+                            <h1 class="animated mrg-bottom">Become a Merchant. <br>  Sell e-Pins Online. </h1>
+                            <p class="animated">Sell WAEC, NECO , NABTEB registration and result checker pins on ePinMart. </p>
+                            <div class="btn-style-1">
+                                <a class="animated btn-1-padding-5" asp-action="login" asp-controller="account">Join us </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12 col-sm-6">
+                        <div class="single-slider-img single-slider-img-5">
+                            <img class="animated" src="~/images/sliders/page-15.jpeg" alt="ePiMart">
+                            <div class="slider-product-price slider-product-position6 slider-animated-1 animated">
+                                <h3>
+                                    <span>It is </span>
+                                    Free
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single-hero-slider single-animation-wrap slider-height-3 custom-d-flex custom-align-item-center hm3-bg-color-3">
+            <div class="custom-container">
+                <div class="row align-items-center slider-animated-1">
+                    <div class="col-lg-6 col-md-6 col-12 col-sm-6">
+                        <div class="hero-slider-content-3">
+                            <h3 class="animated">Vend Pins</h3>
+                            <h1 class="animated font-inc">Have Custom Pins?<br>Be a Vendor.</h1>
+                            <p class="animated">The easiest way to vend your custom pins for your event(s). Your clients can securely get your pins from us.</p>
+                            <div class="btn-style-1">
+                                <a class="animated btn-1-padding-5" asp-action="contact" asp-controller="home">Contact us</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12 col-sm-6">
+                        <div class="single-slider-img single-slider-img-6">
+                            <img class="animated" src="~/images/sliders/page-6.jpeg" alt="ePinMart">
+                            <div class="slider-product-price slider-product-position7 slider-animated-1 animated">
+                                <h3>
+                                    Fast
+                                    <span class="mrg-top">Secure </span>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="banner-area padding-30-row-col pb-30 pt-30">
+    <div class="custom-container">
+        <div class="section-title-1 mb-40">
+            <h2>Shop by vendors</h2>
+        </div>
+        <div class="row" id="vendors">
+
+        </div>
+    </div>
+</div>
+<div class="product-area pt-30 pb-75">
+    <div class="custom-container">
+        <div class="product-area-border">
+            <div class="section-title-timer-wrap">
+                <div class="section-title-1">
+                    <h2>Deal Of The Day</h2>
+                </div>
+                <div id="timer-1-active" class="timer-style-1">
+                    <span>End in:</span>
+                    <div data-countdown="2030/8/30"></div>
+                </div>
+            </div>
+            <div class="product-slider-active-1 nav-style-2 product-hm1-mrg" id="cardPinTypesDeals">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="banner-area padding-30-row-col pb-45">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="banner-wrap mb-30">
+                    <div class="banner-img banner-img-zoom">
+                        <a href="product-details.html"><img src="~/assets/images/banner/banner-6.jpg" alt=""></a>
+                    </div>
+                    <div class="banner-content-2">
+                        <h2>Independent Living</h2>
+                        <h3 class="d-none d-sm-block">Classic Personal Vaporizer</h3>
+                        <h4>$35.00</h4>
+                        <div class="btn-style-1">
+                            <a class="font-size-14 btn-1-padding-2" href="product-details.html">Shop now </a>
+                        </div>
+                    </div>
+                    <div class="banner-badge-2 banner-badge-2-position1">
+                        <h3>
+                            <span>Best</span>
+                            Selling
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="banner-wrap mb-30">
+                    <div class="banner-img banner-img-zoom">
+                        <a href="product-details.html"><img src="~/assets/images/banner/banner-7.jpg" alt=""></a>
+                    </div>
+                    <div class="banner-content-3">
+                        <span>Home Medical Supplies</span>
+                        <h2>Digital Thermometer</h2>
+                        <h4>$45.00 - $55.00</h4>
+                        <div class="btn-style-1">
+                            <a class="font-size-14 btn-1-padding-2" href="product-details.html">Shop now </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="product-area pb-20">
+    <div class="custom-container">
+        <div class="section-title-btn-wrap mb-40">
+            <div class="section-title-1">
+                <h2>Best selling items</h2>
+            </div>
+            <div class="btn-style-2 mrg-top-xs">
+                <a asp-controller="home" asp-action="products">View all products <i class="far fa-long-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="row" id="cardPinTypesProducts">
+
+        </div>
+    </div>
+</div>
+<div class="testimonial-area pb-75">
+    <div class="custom-container">
+        <div class="section-title-btn-wrap mb-35">
+            <div class="section-title-1">
+                <h2 class="font-weight-light">Our Clients Always Speak for Us</h2>
+            </div>
+            <div class="btn-style-2 mrg-top-xs">
+                <a href="#">View all reviews <i class="far fa-long-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="testimonial-active-1 nav-style-2 nav-style-2-modify-1">
+            <div class="testimonial-plr-1">
+                <div class="single-testimonial">
+                    <div class="single-sidebar-post justify-content-center">
+                        <div class="sidebar-post-img">
+                            <a href="blog-details.html"><img src="~/assets/images/blog/bolajiavatar.jpeg" alt=""></a>
+                        </div>
+
+                        <p> <h4 class="font-italic">ePin Mart is surely the best place you can buy and sell your e-pins and tickets. In seconds, they deliver your items to you. Support is astonishing.</h4></p>
+                    </div>
+                    <div class="client-info">
+                        <h5 class="text-primary">Kehinde Bolaji</h5>
+                        <span>CEO/ HAMGAM Ventures, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-plr-1">
+                <div class="single-testimonial">
+                    <div class="single-sidebar-post justify-content-center">
+                        <div class="sidebar-post-img">
+                            <a href="blog-details.html"><img src="~/assets/images/blog/fmpic.jpg" alt=""></a>
+                        </div>
+
+                        <p> <h4 class="font-italic">This is a great design and I hope that we will create a website with a good signature. HasTech team is reactive and kind.</h4></p>
+                    </div>
+                    <div class="client-info">
+                        <h5 class="text-primary">Kehinde Bolaji</h5>
+                        <span>CEO/ HAMGAM Ventures, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-plr-1">
+                <div class="single-testimonial">
+                    <div class="single-sidebar-post justify-content-center">
+                        <div class="sidebar-post-img">
+                            <a href="blog-details.html"><img src="~/assets/images/blog/bolajiavatar.jpeg" alt=""></a>
+                        </div>
+
+                        <p> <h4 class="font-italic">This is a great design and I hope that we will create a website with a good signature. HasTech team is reactive and kind.</h4></p>
+                    </div>
+                    <div class="client-info">
+                        <h5 class="text-primary">Kehinde Bolaji</h5>
+                        <span>CEO/ HAMGAM Ventures, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-plr-1">
+                <div class="single-testimonial">
+                    <div class="single-sidebar-post justify-content-center">
+                        <div class="sidebar-post-img">
+                            <a href="blog-details.html"><img src="~/assets/images/blog/bolajiavatar.jpeg" alt=""></a>
+                        </div>
+
+                        <p> <h4 class="font-italic">This is a great design and I hope that we will create a website with a good signature. HasTech team is reactive and kind.</h4></p>
+                    </div>
+                    <div class="client-info">
+                        <h5 class="text-primary">Kehinde Bolaji</h5>
+                        <span>CEO/ HAMGAM Ventures, Nigeria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contact-area bg-gray-2">
+    <div class="custom-container">
+        <div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-12 col-sm-6">
+                <div class="single-contact-wrap text-center">
+                    <h4>Store location</h4>
+                    <p>
+                        Abeokuta, Nigeria
+                    </p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-12 col-sm-6">
+                <div class="single-contact-wrap text-center">
+                    <h4>Work inquiries</h4>
+                    <p> support@epinmart.com</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-12 col-sm-6">
+                <div class="single-contact-wrap text-center">
+                    <h4>Call us</h4>
+                    <p> +234-7065-851-674</p>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-12 col-sm-6">
+                <div class="single-contact-wrap text-center">
+                    <h4>Open hours</h4>
+                    <p>24 Hours</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/js/cardpins.js"></script>
+    <script>
+        bindVendorsToHtml('vendors');
+        bindCardPinTypesDeals("cardPinTypesDeals");
+        bindCardPinTypesProducts("cardPinTypesProducts");
+    </script>
+
+}
+
+@*@section style {
+    <style>
+        .promobg {
+            background-image: url(../images/backg.png);
+            background-repeat: no-repeat;
+            background-size: 400px;
+        }
+
+        .carousel-inner img {
+            width: 100%; /* Set width to 100% */
+            min-height: 200px;
+        }
+
+        .btn-add-cart {
+            position: absolute;
+            right: 15px;
+            top: 0px;
+        }
+
+        .notification {
+            color: white;
+            text-decoration: none;
+            padding: 5px 3px;
+            position: relative;
+            display: inline-block;
+            border-radius: 2px;
+        }
+
+
+
+            .notification .badge {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                padding: 5px 10px;
+                border-radius: 50%;
+                background: red;
+                color: white;
+            }
+
+        .checked {
+            color: orange;
+        }
+
+        .zoom {
+            transition: transform .2s; /* Animation */
+            margin: 0 auto;
+        }
+
+            .zoom:hover {
+                transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+            }
+
+        .modal-confirm {
+            color: #636363;
+            width: 325px;
+            font-size: 14px;
+        }
+
+            .modal-confirm .modal-content {
+                padding: 20px;
+                border-radius: 5px;
+                border: none;
+            }
+
+            .modal-confirm .modal-header {
+                border-bottom: none;
+                position: relative;
+            }
+
+            .modal-confirm h4 {
+                text-align: center;
+                font-size: 26px;
+                margin: 30px 0 -15px;
+            }
+
+            .modal-confirm .form-control, .modal-confirm .btn {
+                min-height: 40px;
+                border-radius: 3px;
+            }
+
+            .modal-confirm .close {
+                position: absolute;
+                top: -5px;
+                right: -5px;
+            }
+
+            .modal-confirm .modal-footer {
+                border: none;
+                text-align: center;
+                border-radius: 5px;
+                font-size: 13px;
+            }
+
+            .modal-confirm .icon-box {
+                color: #fff;
+                position: absolute;
+                margin: 0 auto;
+                left: 0;
+                right: 0;
+                top: -70px;
+                width: 95px;
+                height: 95px;
+                border-radius: 50%;
+                z-index: 9;
+                background: #82ce34;
+                padding: 15px;
+                text-align: center;
+                box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+            }
+
+                .modal-confirm .icon-box i {
+                    font-size: 58px;
+                    position: relative;
+                    top: 3px;
+                }
+
+
+            .modal-confirm.modal-dialog {
+                margin-top: 80px;
+            }
+
+            .modal-confirm .btn {
+                color: #fff;
+                border-radius: 4px;
+                background: #82ce34;
+                text-decoration: none;
+                transition: all 0.4s;
+                line-height: normal;
+                border: none;
+            }
+
+                .modal-confirm .btn:hover, .modal-confirm .btn:focus {
+                    background: #6fb32b;
+                    outline: none;
+                }
+    </style>
+
+}*@
+
+ @* <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators-->
         <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -82,10 +517,11 @@
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
-    </div>
+    </div>*@
     <!-- //banner -->
     <!-- top Products -->
-    <div class="ads-grid">
+
+   <div class="ads-grid">
         <div class="container">
             <!-- tittle heading -->
             <h3 class="tittle-w3l">
@@ -352,41 +788,19 @@
                                 </div>
                                 <div class="item-info-product ">
                                     <h4>
-                                        <a href="single.html">@item.Name</a>
+                                        <p>@item.Name</p>
                                     </h4>
                                     <div class="info-product-price">
                                         <span class="item_price">&#8358 @item.Price</span>
                                         <del>@item.Discount</del>
                                     </div>
-                                    <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                        <form action="#" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                <input type="hidden" name="item_name" value="@item.Name" />
-                                                <input type="hidden" name="amount" value="@item.Price" />
-                                                <input type="hidden" name="discount_amount" value="@item.Discount" />
-                                                <input type="hidden" name="currency_code" value="N" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Add to cart" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
+                                  
+                                     <button class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out" type="submit" onclick="addToCart(this)" id="item-@item.Id" data-name="@item.Name" data-price="@item.Price" data-id="@item.Id"  style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
 
                                 </div>
                             </div>
                         </div>
-                           @* <div class="col-sm-3 active img-responsive   mb-2">
-                                <a asp-action="Details" asp-controller="Item" asp-route-id="@item.ItemId" title="Vegebasket" data-toggle="popover" data-trigger="hover" data-content="Click add to cart to enjoy our fresh products">
-                                    <img src="~/images/@item.ItemPictureUrl" class="img-responsive zoom" style="width:100%" alt="Image">
-                                </a>
-                                <p class="mb-0">@item.ItemName</p>
-                                <p>&#8358 @item.Price </p>
-
-                                <button type="submit" onclick="addToCart(this)" id="item-@item.ItemId" data-name="@item.ItemName" data-price="@item.Price" data-id="@item.ItemId" class="btn btn-sm btn-outline-success font-weight-bold" style="width:70%"><span class="spinner-grow spinner-grow-sm"></span><small>ADD TO CART</small></button>
-                            </div>*@
+                          
                         }
                      
                         <div class="clearfix"></div>
@@ -416,12 +830,58 @@
                    
                 </div>
             </div>
+             <div id="cart-modal" class="modal fade align-content-center" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="container bg-light">
+                        <div class="row justify-content-center">
+                            <div>
+                                <h5 class="text-dark">COMMUNITYPRO CART </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-header ">
+
+                        <h5 class="modal-title text-success" id="item-name"> </h5>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    &#8358 <h5 id="item-price" class="text-dark font-weight-light"></h5>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input id="quantity" class="form-control col-sm-12" min="1" type="number" placeholder="Quantity" />
+                                </div>
+                                <div class="col-sm-3">
+                                    &#8358 <h5 id="item-total" class="text-primary font-weight-light"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer bg-light">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button href="#myModal" type="button" id="save" class="btn btn-success trigger-btn" data-toggle="modal">Add to Cart</button>
+
+                    </div>
+                </div>
+            </div>
+            </div>
             <!-- //product right -->
         </div>
     </div>
+
+
     <!-- //top products -->
     <!-- special offers -->
-    <div class="featured-section" id="projects">
+   @* <div class="featured-section" id="projects">
         <div class="container">
             <!-- tittle heading -->
             <h3 class="tittle-w3l">
@@ -475,4 +935,4 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div>*@

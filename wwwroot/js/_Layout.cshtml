@@ -1,0 +1,169 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no" />
+    <title>@ViewData["Title"] - Vegebasket</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    
+
+
+
+
+
+
+    <link rel="stylesheet" href="~/css/animate.min.css" />
+    <link rel="stylesheet" href="~/css/sweetalert.min.css" />
+
+    <link href="~/fontawesome-free-5.14.0-web/css/all.css" rel="stylesheet">
+    <style>
+        .notification {
+            color: white;
+            text-decoration: none;
+            padding: 5px 3px;
+            position: relative;
+            display: inline-block;
+            border-radius: 2px;
+        }
+
+
+
+            .notification .badge {
+                position: absolute;
+                top: -10px;
+                right: -10px;
+                padding: 5px 10px;
+                border-radius: 50%;
+                background: red;
+                color: white;
+            }
+
+
+    </style>
+
+
+    @RenderSection("style", required: false)
+</head>
+<body>
+    <header>
+        <div class="topbar-mobile  hidden-lg hidden-md hidden-xxs clearfix"></div>
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
+
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="/images/vege.png" alt="Logo" style="width:120px;height:60px">
+            </a>
+            <div class="nav-item  mr-3">
+                <a class="nav-link text-success" asp-area="" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+            </div>
+            <div class="nav-item dropdown mr-3">
+                <a class="nav-link dropdown-toggle text-success notification" href="#" id="navbardrop" data-toggle="dropdown" data-spy="affix" data-offset-top="10">
+                    <i class="fa fa-stack-2x fa-shopping-basket"></i><span class="badge" id='total-quantity-label'>0</span>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="viewCart">View Cart</a>
+                </div>
+
+                @*<div class="dropdown-menu" id="cart-menu" aria-labelledby="dropdownMenuButton">
+
+                    </div>*@
+
+            </div>
+            <button class="navbar-toggler mr-3" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse mr-3 " id="navbarNav">
+                <ul class="navbar-nav">
+
+
+
+                    @if (User != null && User.Identity.IsAuthenticated)
+
+                    {
+
+                        <li class="nav-item active mr-3 float-right">
+                            <a class="nav-link text-success" href="#">@User.Identity.Name</a>
+                        </li>
+                        <li class="nav-item mr-3 float-right">
+                            <a class="nav-link text-success  mr-3" asp-area="" asp-controller="Customer" asp-action="Logout"><i class="fas fa-user"></i> Logout</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <a class="nav-link text-success  mr-3" asp-area="" asp-controller="Customer" asp-action="Login"><i class="fas fa-user"></i>Login</a>
+                    }
+
+
+                    <li class="nav-item float-right">
+                        <a class="nav-link text-success " asp-area="" asp-controller="Customer" asp-action="Create"><i class="fas fa-user"></i>Sign up</a>
+                    </li>
+                    <li class="nav-item mr-3 float-right">
+                        <form class="form-inline  " method="post" asp-action="Search" asp-controller="Home">
+
+                            <input class="form-control nav-link " type="search" name="search" placeholder="Search for products..." aria-label="Search" style="width:200px;">
+                            <button class="btn btn-success text-white ml-0 nav-link" type="submit">Search</button>
+
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <div class="container bg-light mb-0">
+        <div class="row">
+            <div class="col-sm-3 text-center mb-0">
+                <p class="mb-0 text-success"><h6 class="text-success">Vegebasket</h6></p>
+                <hr>
+
+                <a class="text-dark text-underline no-wrap mb-0" asp-area="" asp-controller="Home" asp-action="AboutUs"><small>About us</small> </a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"><small>Latest news</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"><small>Careers</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"> <small>Our sponsorships</small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"><small>Ethics and Compliance</small></a><p class="mb-0"></p>
+            </div>
+
+            <div class="col-sm-3 text-center mb-0">
+                <p class="mb-0 text-success"><h6 class="text-success">Help</h6></p>
+                <hr>
+                <a class="text-dark text-underline no-wrap mb-0" href="#"><small>FAQs </small></a><p class="mb-0"></p>
+                <a class="text-dark text-underline no-wrap mb-0" target="_blank" href="#"><small>Contact us</small></a><p class="mb-0"></p>
+                <a href="mailto:adeyemisworld@gmail.com?subject=Questions" title="">Mail us</a>
+            </div>
+
+        </div>
+
+    </div>
+    <br />
+
+
+    <footer class="border-top footer text-muted">
+
+        <div class="container bg-success">
+            <p class="text-center text-white align-content-center">&copy; 2020 - Vegebasket - <a asp-area="" asp-controller="Home" asp-action="AboutUs">About us</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/sweetalert.min.js"></script>
+    <script src="~/js/shoppingcart.min.js"></script>
+
+    <script src="~/js/fresh.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,141 @@
+﻿@{
+}
+<div class="breadcrumb-area breadcrumb-area-padding-2 bg-gray-2">
+    <div class="custom-container">
+        <div class="breadcrumb-content text-center">
+            <ul>
+                <li>
+                    <a asp-controller="home" asp-action="index">Home</a>
+                </li>
+                <li class="active">Shopping Cart</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="cart-area pt-75 pb-35">
+    <div class="container">
+        <div id="emptyCartInfo" class="custom-container">
+            <div class="breadcrumb-content text-center">
+                <div class="medizin-common-paragraph-style paragraph-mrg-dec">
+                    <h2 >Your cart is empty!</h2>
+                </div>
+            </div>
+            <div class="continure-clear-btn text-center">
+                <div class="continure-btn">
+                    <a asp-controller="home" asp-action="index">Start shopping</a>
+                </div>
+
+            </div>
+        </div>
+        <div id="cartTable" class="row">
+            <div class="col-12">
+                <form action="#">
+                    <div class="cart-table-content">
+                        <div class="table-content table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="width-thumbnail">Product</th>
+                                        <th class="width-name"></th>
+                                        <th class="width-price"> Price</th>
+                                        <th class="width-quantity">Quantity</th>
+                                        <th class="width-subtotal">Subtotal</th>
+                                        <th class="width-remove"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cartItemsTable">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="cart-shiping-update-wrapper">
+                            <div class="continure-clear-btn">
+                                <div class="continure-btn">
+                                    <a asp-controller="home" asp-action="index">Continue shopping</a>
+                                </div>
+
+                            </div>
+                            <div id="clearCart" class="continure-clear-btn">
+                                <div class="clear-btn">
+                                    <a href="javascript:void(0)" onclick="handleClearCart()"><i class="fal fa-times"></i> Clear cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row" id="checkoutInfo">
+            <div class="col-lg-4 col-md-12 col-12">
+                <div class="grand-total-wrap mb-40">
+                    <ul>
+                        <li>
+                            Subtotal <h4 id="cartSubTotalAmount">$180.00</h4>
+                        </li>
+                        <li>
+                            VAT <h4>₦00.00</h4>
+                        </li>
+                    </ul>
+                    <div class="grand-total">
+                        <h4>Total <span id="cartTotalAmount">₦00.00</span></h4>
+                    </div>
+                    <div class="grand-total-btn">
+                        <a asp-controller="cart" asp-action="checkout">Checkout</a>
+                    </div>
+                </div>
+             
+            </div>
+            <div id="cartLogin" class="col-lg-8 col-md-12 col-12">
+                <div class="billing-info-wrap">
+                    <h4> If you are a new customer, please enter your name and email.</h4>
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="billing-info input-style mb-35">
+                                    <label>Full Name *</label>
+                                    <input type="text" name="fullname">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="billing-info input-style mb-35">
+                                    <label>Email *</label>
+                                    <input type="email" name="email">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="customer-zone padding-20-row-col mb-10">
+                    <p class="cart-page-title">Already have an account? <a class="checkout-click1" asp-controller="account" asp-action="login">Click here to login</a></p>
+                    <div class="checkout-login-info">
+                        <p>If you have an account with us before, please login.</p>
+                        <form id="cartLoginForm" action="#" method="post">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="sin-checkout-login input-style mrg-small-device">
+                                        <label>Username or email *</label>
+                                        <input type="text" required name="username">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="sin-checkout-login input-style">
+                                        <label>Password *</label>
+                                        <input type="password" required name="password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button-remember-wrap">
+                                <button id="cartLoginSubmit" class="button" type="submit">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        updateCartPageDisplay(cartConfig.cartItemsTableId);
+        handleCartLoginForm();
+    </script>
+}
