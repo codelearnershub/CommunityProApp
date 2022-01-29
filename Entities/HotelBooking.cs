@@ -8,6 +8,7 @@ namespace CommunityProApp.Entities
 {
     public class HotelBooking : BaseEntity
     {
+        public string ReferenceNumber { get; set; }
         public int CustomerId { get; set; }
 
         public Customer Customer { get; set; }
@@ -20,10 +21,11 @@ namespace CommunityProApp.Entities
 
         public BookingStatus Status { get; set; }
 
-        public DateTime From { get; set; }
+        public DateTime CheckInDate { get; set; }
 
-        public int Duration { get; set; }
+        public DateTime CheckOutDate { get; set; }
 
-        
+        public int NumberOfAdults { get; set; }
+
     }
 }

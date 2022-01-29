@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace CommunityProApp.Enums
 {
-    public enum RoomType
+    public enum RoomAvailabilityStatus
     {
-        Standard,
-        Classic,
-        Deluxe
+        Available,
+        Booked,
+        NotAvailable
     }
 }
