@@ -80,7 +80,19 @@ namespace CommunityProApp.Implementations.Services
 
         public IList<FoodItemDto> DisplayFoodItems()
         {
-            throw new NotImplementedException();
+          
+           return _resturantRepository.Get().Select(foodItem => new FoodItemDto 
+           {
+                Id=foodItem.Id,
+                  Name=foodItem.Name,
+                  Description=foodItem.Description,
+                  Price=foodItem.Price,
+                  Discount=foodItem.Discount,
+                  ProductImage=foodItem.ProductImage,
+                  Rating=foodItem.Rating,
+                  ProductAdditionalImage1=foodItem.ProductAdditionalImage1,
+                  ProductAdditionalImage2=foodItem.ProductAdditionalImage2, 
+           }).ToList();
         }
 
         public FoodItemDto FoodItemDetail(int id)
